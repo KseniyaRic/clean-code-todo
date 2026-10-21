@@ -6,7 +6,7 @@
     "globals": "^17.13.0",
     "prettier": "^3.9.10"
   },
-   "scripts": {
+  "scripts": {
     "lint": "eslint .",
     "format": "prettier --write ."
   }
