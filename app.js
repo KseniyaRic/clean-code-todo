@@ -3,39 +3,42 @@ const addButton = document.getElementsByTagName('button')[0];
 const incompleteTaskHolder = document.getElementById('incomplete-tasks');
 const completedTasksHolder = document.getElementById('completed-tasks');
 
-//New task list item
-const createNewTaskElement = function (taskString) {
+function createButton(className, text, imgSrc) {
+  const button = document.createElement('button');
+  button.className = className;
+
+  if (text) {
+    button.innerText = text;
+  }
+  if (imgSrc) {
+    const image = document.createElement('img');
+    image.src = imgSrc;
+    button.appendChild(image);
+  }
+  return button;
+}
+
+function createNewTaskElement(taskString) {
   const listItem = document.createElement('li');
 
   const checkBox = document.createElement('input');
+  checkBox.type = 'checkbox';
 
   const label = document.createElement('label');
-  const editInput = document.createElement('input');
-  const editButton = document.createElement('button');
-  const deleteButton = document.createElement('button');
-  const deleteButtonImg = document.createElement('img');
-
   label.innerText = taskString;
   label.className = 'task';
 
-  checkBox.type = 'checkbox';
+  const editInput = document.createElement('input');
   editInput.type = 'text';
   editInput.className = 'task';
 
-  editButton.innerText = 'Edit'; //innerText encodes special characters, HTML does not.
-  editButton.className = 'edit';
+  const editButton = createButton('edit', 'Edit');
+  const deleteButton = createButton('delete', null, './remove.svg');
 
-  deleteButton.className = 'delete';
-  deleteButtonImg.src = './remove.svg';
-  deleteButton.appendChild(deleteButtonImg);
+  listItem.append(checkBox, label, editInput, editButton, deleteButton);
 
-  listItem.appendChild(checkBox);
-  listItem.appendChild(label);
-  listItem.appendChild(editInput);
-  listItem.appendChild(editButton);
-  listItem.appendChild(deleteButton);
   return listItem;
-};
+}
 
 const addTask = function () {
   if (!taskInput.value) return;
