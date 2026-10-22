@@ -40,15 +40,16 @@ function createNewTaskElement(taskString) {
   return listItem;
 }
 
-const addTask = function () {
-  if (!taskInput.value) return;
-  const listItem = createNewTaskElement(taskInput.value);
+function addTask() {
+  const taskText = taskInput.value.trim();
+  if (!taskText) return;
 
-  incompleteTaskHolder.appendChild(listItem);
-  bindTaskEvents(listItem, taskCompleted);
+  const newTaskElement = createNewTaskElement(taskText);
+  incompleteTaskHolder.appendChild(newTaskElement);
+  bindTaskEvents(newTaskElement, taskCompleted);
 
   taskInput.value = '';
-};
+}
 
 const editTask = function () {
   const listItem = this.parentNode;
