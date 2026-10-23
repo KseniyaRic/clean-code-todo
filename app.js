@@ -93,15 +93,15 @@ function moveTaskToIncompleted() {
 addButton.onclick = addTask;
 addButton.addEventListener('click', addTask);
 
-const bindTaskEvents = function (taskcurrentTask, checkBoxEventHandler) {
-  const checkBox = taskcurrentTask.querySelector('input[type=checkbox]');
-  const editButton = taskcurrentTask.querySelector('button.edit');
-  const deleteButton = taskcurrentTask.querySelector('button.delete');
+function bindTaskEvents(task, checkboxHandler) {
+  const checkBox = task.querySelector('input[type=checkbox]');
+  const editButton = task.querySelector('button.edit');
+  const deleteButton = task.querySelector('button.delete');
 
-  editButton.onclick = editTask;
-  deleteButton.onclick = deleteTask;
-  checkBox.onchange = checkBoxEventHandler;
-};
+  editButton.addEventListener('click', editTask);
+  deleteButton.addEventListener('click', deleteTask);
+  checkBox.addEventListener('change', checkboxHandler);
+}
 
 for (let i = 0; i < incompleteTasksHolder.children.length; i++) {
   bindTaskEvents(incompleteTasksHolder.children[i], moveTaskToCompleted);
