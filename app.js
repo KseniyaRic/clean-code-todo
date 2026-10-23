@@ -51,22 +51,26 @@ function addTask() {
   taskInput.value = '';
 }
 
+const EDIT_MODE_CLASS = 'editMode';
+const LABEL_EDIT = 'Edit';
+const LABEL_SAVE = 'Save';
+
 function editTask() {
   const currentTask = this.parentNode;
   const editInput = currentTask.querySelector('input[type=text]');
   const label = currentTask.querySelector('label');
   const editButton = currentTask.querySelector('.edit');
-  const isEditing = currentTask.classList.contains('editMode');
+  const isEditing = currentTask.classList.contains(EDIT_MODE_CLASS);
 
   if (isEditing) {
     label.innerText = editInput.value;
-    editButton.innerText = 'Edit';
+    editButton.innerText = LABEL_EDIT;
   } else {
     editInput.value = label.innerText;
-    editButton.innerText = 'Save';
+    editButton.innerText = LABEL_SAVE;
   }
 
-  currentTask.classList.toggle('editMode');
+  currentTask.classList.toggle(EDIT_MODE_CLASS);
 }
 
 function deleteTask() {
