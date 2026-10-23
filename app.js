@@ -3,41 +3,41 @@ const addButton = document.getElementsByTagName('button')[0];
 const incompleteTasksHolder = document.getElementById('incomplete-tasks');
 const completeTasksHolder = document.getElementById('complete-tasks');
 
-function createButton(className, text, imgSrc) {
+function createButton({ type, text = null, icon = null }) {
   const button = document.createElement('button');
-  button.className = className;
+  button.className = type;
 
   if (text) {
     button.innerText = text;
   }
-  if (imgSrc) {
+  if (icon) {
     const image = document.createElement('img');
-    image.src = imgSrc;
+    image.src = icon;
     button.appendChild(image);
   }
   return button;
 }
 
 function createNewTaskElement(taskString) {
-  const listItem = document.createElement('li');
+  const taskElement = document.createElement('li');
 
   const checkBox = document.createElement('input');
   checkBox.type = 'checkbox';
 
   const label = document.createElement('label');
-  label.innerText = taskString;
+  label.innerText = taskString; //innerText encodes special characters, HTML does not.
   label.className = 'task';
 
   const editInput = document.createElement('input');
   editInput.type = 'text';
   editInput.className = 'task';
 
-  const editButton = createButton('edit', 'Edit');
-  const deleteButton = createButton('delete', null, './remove.svg');
+  const editButton = createButton({ type: 'edit', text: 'Edit' });
+  const deleteButton = createButton({ type: 'delete', icon: './remove.svg' });
 
-  listItem.append(checkBox, label, editInput, editButton, deleteButton);
+  taskElement.append(checkBox, label, editInput, editButton, deleteButton);
 
-  return listItem;
+  return taskElement;
 }
 
 function addTask() {
@@ -86,11 +86,8 @@ function moveTaskToIncompleted() {
   bindTaskEvents(currentTask, moveTaskToCompleted);
 }
 
-const ajaxRequest = function () {};
-
 addButton.onclick = addTask;
 addButton.addEventListener('click', addTask);
-addButton.addEventListener('click', ajaxRequest);
 
 const bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
   const checkBox = taskListItem.querySelector('input[type=checkbox]');
