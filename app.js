@@ -69,11 +69,10 @@ const editTask = function () {
   listItem.classList.toggle('editMode');
 };
 
-const deleteTask = function () {
-  const listItem = this.parentNode;
-  const ul = listItem.parentNode;
-  ul.removeChild(listItem);
-};
+function deleteTask() {
+  const currentTask = this.parentNode;
+  currentTask.remove();
+}
 
 const taskCompleted = function () {
   const listItem = this.parentNode;
