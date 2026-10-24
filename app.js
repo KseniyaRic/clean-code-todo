@@ -92,7 +92,6 @@ function moveTaskToIncompleted() {
   bindTaskEvents(currentTask, moveTaskToCompleted);
 }
 
-addButton.onclick = addTask;
 addButton.addEventListener('click', addTask);
 
 function bindTaskEvents(task, checkboxHandler) {
@@ -102,7 +101,7 @@ function bindTaskEvents(task, checkboxHandler) {
 
   editButton.addEventListener('click', editTask);
   deleteButton.addEventListener('click', deleteTask);
-  checkBox.addEventListener('change', checkboxHandler);
+  checkBox.onchange = checkboxHandler;
 }
 
 function bindEventsToAll(container, handler) {
