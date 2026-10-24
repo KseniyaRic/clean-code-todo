@@ -10,11 +10,13 @@ function createButton({ type, text = null, icon = null }) {
   if (text) {
     button.innerText = text;
   }
+
   if (icon) {
     const image = document.createElement('img');
     image.src = icon;
     button.appendChild(image);
   }
+
   return button;
 }
 
@@ -103,10 +105,11 @@ function bindTaskEvents(task, checkboxHandler) {
   checkBox.addEventListener('change', checkboxHandler);
 }
 
-for (let i = 0; i < incompleteTasksHolder.children.length; i++) {
-  bindTaskEvents(incompleteTasksHolder.children[i], moveTaskToCompleted);
+function bindEventsToAll(container, handler) {
+  for (let i = 0; i < container.children.length; i++) {
+    bindTaskEvents(container.children[i], handler);
+  }
 }
 
-for (let i = 0; i < completeTasksHolder.children.length; i++) {
-  bindTaskEvents(completeTasksHolder.children[i], moveTaskToIncompleted);
-}
+bindEventsToAll(incompleteTasksHolder, moveTaskToCompleted);
+bindEventsToAll(completeTasksHolder, moveTaskToIncompleted);
